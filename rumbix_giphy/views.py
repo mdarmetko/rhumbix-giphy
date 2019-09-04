@@ -16,5 +16,5 @@ def get_giphy(search):
 
 def suggest_keyword(search):
     suggestions = ['about','above','across','app','apple','appreciate','bad','ball','balloon','bell','cat']
-    matches = [s for s in suggestions if search in s]
+    matches = [s for s in suggestions if s.startswith(search) and search != s]
     return matches

@@ -3,7 +3,8 @@ import requests
 
 def Giphy(request, search_term):
     giphy_url = get_giphy(search_term)
-    return JsonResponse({'url': giphy_url})
+    suggestions = suggest_keyword(search_term)
+    return JsonResponse({'url': giphy_url, 'suggestions': suggestions})
 
 
 def get_giphy(search):
@@ -11,3 +12,9 @@ def get_giphy(search):
     response = requests.get(url)
     giphy_url = response.json()['data'][0]['embed_url']
     return giphy_url
+
+
+def suggest_keyword(search):
+    suggestions = ['about','above','across','app','apple','appreciate','bad','ball','balloon','bell','cat']
+    matches = [s for s in suggestions if search in s]
+    return matches
